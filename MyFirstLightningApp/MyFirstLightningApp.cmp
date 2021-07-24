@@ -1,0 +1,19 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<div class="slds-p-around_none">
+    <h1 class="red"> My First App </h1>
+    
+    
+    <p> </p>
+    <b class="green"> Bold Tag </b>
+    
+   
+    <p> </p>
+    <i class="blue">Italic Tag </i>
+    
+    
+    <p> </p>
+    <u style= "color: red; background-color: blue" > Underline Tag </u>
+    
+    </div>
+    
+</aura:component>

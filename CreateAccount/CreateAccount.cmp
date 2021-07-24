@@ -1,0 +1,108 @@
+<aura:component controller="getAllAccounts" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute type="Account[]" name="acctList"/>
+    <aura:attribute type="List" name="mycolumns" />
+    
+    <aura:attribute name="PageHeading" type="String" default="Account Information" />
+    <aura:attribute name="mydata" type="List"/>
+    <aura:attribute name="accdata" type="List"/>
+    <aura:attribute name="mydata1" type="List"/>
+    <aura:attribute name="accForm" type="Account" default="{'sobjectType' : 'Account'}"/>
+    
+    
+    
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.fetchAcc}"/>
+    <aura:handler event="force:refreshView" action="{!c.fetchAcc}" />
+    
+    
+    <aura:attribute name="accCount" type="Integer" description="Total Number Of Accounts"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+     
+   
+    
+    
+    
+    <div class="slds-m-top--xx-large">
+        <div class="slds-page-header">
+            <div class="slds-align--absolute-center">
+                <div class="slds-text-heading--large">       
+                    {!v.PageHeading}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/> <br/>
+    
+    <lightning:card title="Account Count">
+        
+        <p class="slds-p-horizontal_small">
+              {!v.accCount}   <br/>
+        </p>
+    </lightning:card>
+   
+   
+    
+    <lightning:button label="Create New Account"
+                      iconName="utility:new_window"
+                      iconPosition="left"
+                      variant="brand"
+                      onclick="{!c.newPopup}"
+                      />
+    
+    <div role="dialog" tabindex="-1" aria-labelledby="header43" aura:id="Modalbox1" class="slds-modal slds-modal_large">
+        <div class="slds-modal__container" style="width: 65%;">
+            <div class="slds-modal__header">
+                New Account
+            </div>
+            
+            <div class="slds-modal__content slds-p-around--medium">
+                <div class="slds-p-left_xx-large slds-p-right_xx-large">
+                    <div class="slds-page-header" style="padding-top: 9px; padding-bottom: 9px;, padding-right: 9px;, padding-left: 10px;">
+                        <h3 style="font-size: 1rem;" title="">Account Information</h3>
+                    </div> 
+                </div>    
+                <div class="slds-grid slds-p-top_medium">
+                    <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                        <lightning:input label="Account Name" name="myname" value="{!v.accForm.Name}" required="True"/> 
+                    </div>
+                    <div class="slds-size_5-of-12 slds-p-left_xx-small slds-p-horizontal_x-large " >
+                        <lightning:input label="Phone" name="myname" value="{!v.accForm.Phone}"/> 
+                    </div>
+                </div>
+                <div class="slds-grid slds-p-top_x-small">
+                    <div class="slds-size_6-of-12 slds-p-left_xx-large slds-p-horizontal_x-large " >
+                        <lightning:input label="Account Number" name="mynumber" value="{!v.accForm.AccountNumber}"/> 
+                    </div>
+                    <div class="slds-size_5-of-12 slds-p-left_xx-small slds-p-horizontal_x-large " >
+                        <lightning:input label="Description" name="myphone" value="{!v.accForm.Description}"/> 
+                    </div>
+                </div>
+            </div>
+            <div class="slds-modal__footer">
+                <lightning:button label="Save" onclick="{!c.saveModal}" />
+                <lightning:button label="close" onclick="{!c.closeNewModal}" />
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade">
+            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Accounts</span>
+        </h3>
+        <br/>
+     </div>
+    
+    
+       
+    
+    
+    
+      
+    <lightning:datatable data="{! v.acctList }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+</aura:component>
